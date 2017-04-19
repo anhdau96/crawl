@@ -29,9 +29,8 @@ public class MyDriver {
         cliArgsCap.add("--ignore-ssl-errors=true");
         cliArgsCap.add("--webdriver-loglevel=INFO");
         cliArgsCap.add("--load-images=false");
-
-        capabilities.setCapability(CapabilityType.SUPPORTS_FINDING_BY_CSS, true);
-        capabilities.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
+        capabilities.setCapability(CapabilityType.SUPPORTS_FINDING_BY_CSS, false);
+        capabilities.setCapability(CapabilityType.TAKES_SCREENSHOT, false);
         capabilities.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, cliArgsCap);
         driver = new PhantomJSDriver(capabilities);
         return driver;
