@@ -80,7 +80,6 @@ public class Positions implements Serializable {
         this.position = position;
     }
 
-    
     @Override
     public int hashCode() {
         int hash = 0;

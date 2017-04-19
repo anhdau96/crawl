@@ -187,7 +187,7 @@ public class PositionsJpaController implements Serializable {
             em.close();
         }
     }
-
+    
     public Positions findByName(String name) {
         EntityManager em = getEntityManager();
         Query query = em.createNamedQuery("Positions.findByPosition");

@@ -83,7 +83,7 @@ public class Colors implements Serializable {
         this.name = name;
         this.imglink = imglink;
     }
-    
+
     @XmlTransient
     public Collection<Details> getDetailsCollection() {
         return detailsCollection;

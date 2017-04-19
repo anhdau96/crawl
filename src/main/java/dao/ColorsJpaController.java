@@ -187,7 +187,8 @@ public class ColorsJpaController implements Serializable {
             em.close();
         }
     }
-     public Colors findByName(String name) {
+
+    public Colors findByName(String name) {
         EntityManager em = getEntityManager();
         Query query = em.createNamedQuery("Colors.findByName");
         query.setParameter("name", name);
