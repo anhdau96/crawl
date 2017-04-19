@@ -40,9 +40,9 @@ public class DetailSize implements Serializable {
     @JoinColumn(name = "idSize", referencedColumnName = "id")
     @ManyToOne
     private Sizes idSize;
-    @JoinColumn(name = "idDetal", referencedColumnName = "id")
+    @JoinColumn(name = "idDetail", referencedColumnName = "id")
     @ManyToOne
-    private Details idDetal;
+    private Details idDetail;
 
     public DetailSize() {
     }
@@ -67,19 +67,19 @@ public class DetailSize implements Serializable {
         this.idSize = idSize;
     }
 
-    public Details getIdDetal() {
-        return idDetal;
+    public Details getIdDetail() {
+        return idDetail;
     }
 
-    public void setIdDetal(Details idDetal) {
-        this.idDetal = idDetal;
+    public void setIdDetail(Details idDetail) {
+        this.idDetail = idDetail;
     }
 
-    public DetailSize(Sizes idSize, Details idDetal) {
+    public DetailSize(Sizes idSize, Details idDetail) {
         this.idSize = idSize;
-        this.idDetal = idDetal;
+        this.idDetail = idDetail;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;

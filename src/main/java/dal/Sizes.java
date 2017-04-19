@@ -70,8 +70,7 @@ public class Sizes implements Serializable {
     public Sizes(String sizeName) {
         this.sizeName = sizeName;
     }
-    
-    
+
     @XmlTransient
     public Collection<DetailSize> getDetailSizeCollection() {
         return detailSizeCollection;

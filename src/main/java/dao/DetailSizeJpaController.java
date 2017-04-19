@@ -43,19 +43,19 @@ public class DetailSizeJpaController implements Serializable {
                 idSize = em.getReference(idSize.getClass(), idSize.getId());
                 detailSize.setIdSize(idSize);
             }
-            Details idDetal = detailSize.getIdDetal();
-            if (idDetal != null) {
-                idDetal = em.getReference(idDetal.getClass(), idDetal.getId());
-                detailSize.setIdDetal(idDetal);
+            Details idDetail = detailSize.getIdDetail();
+            if (idDetail != null) {
+                idDetail = em.getReference(idDetail.getClass(), idDetail.getId());
+                detailSize.setIdDetail(idDetail);
             }
             em.persist(detailSize);
             if (idSize != null) {
                 idSize.getDetailSizeCollection().add(detailSize);
                 idSize = em.merge(idSize);
             }
-            if (idDetal != null) {
-                idDetal.getDetailSizeCollection().add(detailSize);
-                idDetal = em.merge(idDetal);
+            if (idDetail != null) {
+                idDetail.getDetailSizeCollection().add(detailSize);
+                idDetail = em.merge(idDetail);
             }
             em.getTransaction().commit();
         } finally {
@@ -73,15 +73,15 @@ public class DetailSizeJpaController implements Serializable {
             DetailSize persistentDetailSize = em.find(DetailSize.class, detailSize.getId());
             Sizes idSizeOld = persistentDetailSize.getIdSize();
             Sizes idSizeNew = detailSize.getIdSize();
-            Details idDetalOld = persistentDetailSize.getIdDetal();
-            Details idDetalNew = detailSize.getIdDetal();
+            Details idDetailOld = persistentDetailSize.getIdDetail();
+            Details idDetailNew = detailSize.getIdDetail();
             if (idSizeNew != null) {
                 idSizeNew = em.getReference(idSizeNew.getClass(), idSizeNew.getId());
                 detailSize.setIdSize(idSizeNew);
             }
-            if (idDetalNew != null) {
-                idDetalNew = em.getReference(idDetalNew.getClass(), idDetalNew.getId());
-                detailSize.setIdDetal(idDetalNew);
+            if (idDetailNew != null) {
+                idDetailNew = em.getReference(idDetailNew.getClass(), idDetailNew.getId());
+                detailSize.setIdDetail(idDetailNew);
             }
             detailSize = em.merge(detailSize);
             if (idSizeOld != null && !idSizeOld.equals(idSizeNew)) {
@@ -92,13 +92,13 @@ public class DetailSizeJpaController implements Serializable {
                 idSizeNew.getDetailSizeCollection().add(detailSize);
                 idSizeNew = em.merge(idSizeNew);
             }
-            if (idDetalOld != null && !idDetalOld.equals(idDetalNew)) {
-                idDetalOld.getDetailSizeCollection().remove(detailSize);
-                idDetalOld = em.merge(idDetalOld);
+            if (idDetailOld != null && !idDetailOld.equals(idDetailNew)) {
+                idDetailOld.getDetailSizeCollection().remove(detailSize);
+                idDetailOld = em.merge(idDetailOld);
             }
-            if (idDetalNew != null && !idDetalNew.equals(idDetalOld)) {
-                idDetalNew.getDetailSizeCollection().add(detailSize);
-                idDetalNew = em.merge(idDetalNew);
+            if (idDetailNew != null && !idDetailNew.equals(idDetailOld)) {
+                idDetailNew.getDetailSizeCollection().add(detailSize);
+                idDetailNew = em.merge(idDetailNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -134,10 +134,10 @@ public class DetailSizeJpaController implements Serializable {
                 idSize.getDetailSizeCollection().remove(detailSize);
                 idSize = em.merge(idSize);
             }
-            Details idDetal = detailSize.getIdDetal();
-            if (idDetal != null) {
-                idDetal.getDetailSizeCollection().remove(detailSize);
-                idDetal = em.merge(idDetal);
+            Details idDetail = detailSize.getIdDetail();
+            if (idDetail != null) {
+                idDetail.getDetailSizeCollection().remove(detailSize);
+                idDetail = em.merge(idDetail);
             }
             em.remove(detailSize);
             em.getTransaction().commit();

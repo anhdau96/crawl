@@ -90,12 +90,12 @@ public class DetailsJpaController implements Serializable {
                 styleId = em.merge(styleId);
             }
             for (DetailSize detailSizeCollectionDetailSize : details.getDetailSizeCollection()) {
-                Details oldIdDetalOfDetailSizeCollectionDetailSize = detailSizeCollectionDetailSize.getIdDetal();
-                detailSizeCollectionDetailSize.setIdDetal(details);
+                Details oldIdDetailOfDetailSizeCollectionDetailSize = detailSizeCollectionDetailSize.getIdDetail();
+                detailSizeCollectionDetailSize.setIdDetail(details);
                 detailSizeCollectionDetailSize = em.merge(detailSizeCollectionDetailSize);
-                if (oldIdDetalOfDetailSizeCollectionDetailSize != null) {
-                    oldIdDetalOfDetailSizeCollectionDetailSize.getDetailSizeCollection().remove(detailSizeCollectionDetailSize);
-                    oldIdDetalOfDetailSizeCollectionDetailSize = em.merge(oldIdDetalOfDetailSizeCollectionDetailSize);
+                if (oldIdDetailOfDetailSizeCollectionDetailSize != null) {
+                    oldIdDetailOfDetailSizeCollectionDetailSize.getDetailSizeCollection().remove(detailSizeCollectionDetailSize);
+                    oldIdDetailOfDetailSizeCollectionDetailSize = em.merge(oldIdDetailOfDetailSizeCollectionDetailSize);
                 }
             }
             em.getTransaction().commit();
@@ -180,18 +180,18 @@ public class DetailsJpaController implements Serializable {
             }
             for (DetailSize detailSizeCollectionOldDetailSize : detailSizeCollectionOld) {
                 if (!detailSizeCollectionNew.contains(detailSizeCollectionOldDetailSize)) {
-                    detailSizeCollectionOldDetailSize.setIdDetal(null);
+                    detailSizeCollectionOldDetailSize.setIdDetail(null);
                     detailSizeCollectionOldDetailSize = em.merge(detailSizeCollectionOldDetailSize);
                 }
             }
             for (DetailSize detailSizeCollectionNewDetailSize : detailSizeCollectionNew) {
                 if (!detailSizeCollectionOld.contains(detailSizeCollectionNewDetailSize)) {
-                    Details oldIdDetalOfDetailSizeCollectionNewDetailSize = detailSizeCollectionNewDetailSize.getIdDetal();
-                    detailSizeCollectionNewDetailSize.setIdDetal(details);
+                    Details oldIdDetailOfDetailSizeCollectionNewDetailSize = detailSizeCollectionNewDetailSize.getIdDetail();
+                    detailSizeCollectionNewDetailSize.setIdDetail(details);
                     detailSizeCollectionNewDetailSize = em.merge(detailSizeCollectionNewDetailSize);
-                    if (oldIdDetalOfDetailSizeCollectionNewDetailSize != null && !oldIdDetalOfDetailSizeCollectionNewDetailSize.equals(details)) {
-                        oldIdDetalOfDetailSizeCollectionNewDetailSize.getDetailSizeCollection().remove(detailSizeCollectionNewDetailSize);
-                        oldIdDetalOfDetailSizeCollectionNewDetailSize = em.merge(oldIdDetalOfDetailSizeCollectionNewDetailSize);
+                    if (oldIdDetailOfDetailSizeCollectionNewDetailSize != null && !oldIdDetailOfDetailSizeCollectionNewDetailSize.equals(details)) {
+                        oldIdDetailOfDetailSizeCollectionNewDetailSize.getDetailSizeCollection().remove(detailSizeCollectionNewDetailSize);
+                        oldIdDetailOfDetailSizeCollectionNewDetailSize = em.merge(oldIdDetailOfDetailSizeCollectionNewDetailSize);
                     }
                 }
             }
@@ -246,7 +246,7 @@ public class DetailsJpaController implements Serializable {
             }
             Collection<DetailSize> detailSizeCollection = details.getDetailSizeCollection();
             for (DetailSize detailSizeCollectionDetailSize : detailSizeCollection) {
-                detailSizeCollectionDetailSize.setIdDetal(null);
+                detailSizeCollectionDetailSize.setIdDetail(null);
                 detailSizeCollectionDetailSize = em.merge(detailSizeCollectionDetailSize);
             }
             em.remove(details);

@@ -41,30 +41,31 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 public class SunFrogCrawl {
 
     public static void main(String[] args) {
-        Map<String,String> lstLink = new HashMap<>();
+//        Map<String,String> lstLink = new HashMap<>();
         try {
             Document get = Jsoup.connect("https://www.sunfrog.com/").get();
             Element ulCate = get.getElementsByClass("double_menu").get(0);
             Elements elementsByTag = ulCate.getElementsByTag("ul");
             for (Element element : elementsByTag) {
                 Elements lstLis = element.getElementsByTag("li");
-                for (Element lstLi : lstLis) {
+                for (int i=0; i<lstLis.size();i++) {
+                    Element lstLi = lstLis.get(i);
                     if (!lstLi.attr("class").equals("")) {
                         continue;
                     }
                     String linkCate = lstLi.getElementsByTag("a").get(0).attr("href");
                     String cateName = lstLi.getElementsByTag("a").get(0).html();
-                    lstLink.put(cateName, linkCate);
-                    if (lstLink.size() == 3) {
-                        CrawlThread crawlThread = new CrawlThread(lstLink);
-                        crawlThread.start();
-                        System.out.println("Star Thread 1");
-                        lstLink.clear();
-                    }
-//                    if (!checkVisited(linkCate)) {
-//                        getSubCate(linkCate, cateName);
-//                        addVisitLink(linkCate);
+//                    lstLink.put(cateName, linkCate);      
+//                    if (lstLink.size() == 3) {
+//                        CrawlThread crawlThread = new CrawlThread(lstLink);
+//                        crawlThread.start();
+//                        System.out.println("Star Thread 1");
+//                        lstLink.clear();
 //                    }
+                    if ((!checkVisited(linkCate)) && (i%4==0)) {
+                        getSubCate(linkCate, cateName);
+                        addVisitLink(linkCate);
+                    }
                 }
             }
         } catch (IOException ex) {

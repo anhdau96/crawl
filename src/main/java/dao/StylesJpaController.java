@@ -210,5 +210,4 @@ public class StylesJpaController implements Serializable {
             return findByName;
         }
     }
-
 }

@@ -70,8 +70,7 @@ public class Styles implements Serializable {
     public Styles(String styleName) {
         this.styleName = styleName;
     }
-    
-    
+
     @XmlTransient
     public Collection<Details> getDetailsCollection() {
         return detailsCollection;

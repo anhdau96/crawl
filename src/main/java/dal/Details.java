@@ -54,7 +54,7 @@ public class Details implements Serializable {
     private String img;
     @Column(name = "sku")
     private String sku;
-    @OneToMany(mappedBy = "idDetal")
+    @OneToMany(mappedBy = "idDetail")
     private Collection<DetailSize> detailSizeCollection;
     @JoinColumn(name = "colorId", referencedColumnName = "id")
     @ManyToOne

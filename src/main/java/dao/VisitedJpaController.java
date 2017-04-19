@@ -134,7 +134,7 @@ public class VisitedJpaController implements Serializable {
             em.close();
         }
     }
-
+    
     public Visited findLink(String link) {
         EntityManager em = getEntityManager();
         Query query = em.createNamedQuery("Visited.findByLink");

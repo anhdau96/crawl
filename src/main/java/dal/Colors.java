@@ -84,7 +84,6 @@ public class Colors implements Serializable {
         this.imglink = imglink;
     }
     
-    
     @XmlTransient
     public Collection<Details> getDetailsCollection() {
         return detailsCollection;
