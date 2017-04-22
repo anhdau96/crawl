@@ -53,14 +53,7 @@ public class SunFrogCrawl {
                     }
                     String linkCate = lstLi.getElementsByTag("a").get(0).attr("href");
                     String cateName = lstLi.getElementsByTag("a").get(0).html();
-//                    lstLink.put(cateName, linkCate);      
-//                    if (lstLink.size() == 3) {
-//                        CrawlThread crawlThread = new CrawlThread(lstLink);
-//                        crawlThread.start();
-//                        System.out.println("Star Thread 1");
-//                        lstLink.clear();
-//                    }
-                    if ((!checkVisited(linkCate)) && (i%4==0)) {
+                    if ((!checkVisited(linkCate)) && (i%4==1)) {
                         getSubCate(linkCate, cateName);
                         addVisitLink(linkCate);
                     }
@@ -74,9 +67,7 @@ public class SunFrogCrawl {
 
     public static void getSubCate(String link, String cateName) {
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.mycompany_SunFrogCrawl_jar_1.0-SNAPSHOTPU");
-            VisitedJpaController controller = new VisitedJpaController(emf);
-            System.out.println("Get Sub Cate");
+//            System.out.println("Get Sub Cate");
             Document catePage = Jsoup.connect(link).get();
             if (catePage.getElementById("pillbox").getElementsByTag("ul").isEmpty()) {
                 if (!checkVisited(link)) {
@@ -106,7 +97,7 @@ public class SunFrogCrawl {
         MyDriver myDriver = new MyDriver();
         PhantomJSDriver driver = myDriver.getDriver();
         driver.get(link);
-        System.out.println("Connect Link");
+//        System.out.println("Connect Link");
         Document subCatePage = Jsoup.parse(driver.getPageSource());
         myDriver.quitDriver();
         Elements lstShirt = subCatePage.getElementsByAttributeValueContaining("id", "shirtDivDisplay");
@@ -123,7 +114,7 @@ public class SunFrogCrawl {
         MyDriver myDriver = new MyDriver();
         PhantomJSDriver driver = myDriver.getDriver();
         driver.get("https://www.sunfrog.com" + link);
-        System.out.println("Connect Link");
+//        System.out.println("Connect Link");
         Document subCatePage = Jsoup.parse(driver.getPageSource());
         Elements lstShirt = subCatePage.getElementsByAttributeValueContaining("id", "shirtDivDisplay");
         for (Element element : lstShirt) {
@@ -135,11 +126,13 @@ public class SunFrogCrawl {
         int i = 40;
         link = link.replace("&navpill", "");
         link = link.replace("index.cfm", "paged2.cfm");
+//        driver.quit();
         while (i <= 1000) {
             try {
                 System.out.println("https://www.sunfrog.com" + link + "&offset=" + (i + 1));
                 driver.get("https://www.sunfrog.com" + link + "&offset=" + (i + 1));
                 Document ajaxPage = Jsoup.parse(driver.getPageSource());
+//                Document ajaxPage = Jsoup.connect("https://www.sunfrog.com" + link + "&offset=" + (i + 1)).get();
                 if (ajaxPage.getElementsByAttributeValueContaining("id", "shirtDivDisplay").isEmpty()) {
                     break;
                 }
@@ -261,7 +254,7 @@ public class SunFrogCrawl {
                     try {
                         positions = positionsJpaContr.firstOrCreate(detailPage.getElementById("frontorback").html());
                     } catch (Exception exception) {
-                        System.out.println("Back");
+//                        System.out.println("Back");
                         positions = positionsJpaContr.firstOrCreate(detailPage.getElementsByAttributeValueMatching("class", "btn btn-lg btn-default disabled pull-right visible-lg").html());
                     }
                     details.setPositionId(positions);
@@ -283,7 +276,7 @@ public class SunFrogCrawl {
                 try {
                     positions = positionsJpaContr.firstOrCreate(detailPage.getElementById("frontorback").html());
                 } catch (Exception exception) {
-                    System.out.println("Back");
+                   // System.out.println("Back");
                     positions = positionsJpaContr.firstOrCreate(detailPage.getElementsByAttributeValueMatching("class", "btn btn-lg btn-default disabled pull-right visible-lg").html());
                 }
                 details.setPositionId(positions);

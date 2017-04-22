@@ -20,8 +20,7 @@ public class MyDriver {
     private PhantomJSDriver driver;
     
     public PhantomJSDriver getDriver(){
-        System.out.println("Get Data By Cate");
-        System.setProperty("phantomjs.binary.path", "phantomjs.exe");
+        System.setProperty("phantomjs.binary.path", "phantomjs");
         List<String> cliArgsCap = new ArrayList<>();
         DesiredCapabilities capabilities = DesiredCapabilities.phantomjs();
         cliArgsCap.add("--web-security=false");
